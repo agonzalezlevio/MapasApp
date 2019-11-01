@@ -34,7 +34,11 @@ export class MapaComponent implements OnInit {
       data: {titulo: marcador.titulo, descripcion: marcador.descripcion}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (!result) { return; }
+      marcador.titulo = result.titulo;
+      marcador.descripcion = result.descripcion;
+      this.guadarStorage();
+      this.snackBar.open('Marcador Actualizado', 'Cerrar', {duration: 3000});
     });
   }
 
